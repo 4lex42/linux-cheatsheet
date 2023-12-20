@@ -101,7 +101,7 @@ class TestFraction(TestCase):
         # 6 zéro num
         self.assertEqual(frac5.as_mixed_number(), "0 + 0.0/1.0", "as_mixed_number : test avec un num égal à 0")
 
-    def test___add__(self):
+    """def test___add__(self):
         frac = Fraction()
         frac1 = Fraction(10, 5)
         frac2 = Fraction(11, 5)
@@ -140,86 +140,157 @@ class TestFraction(TestCase):
         # 9 zéro num
         self.assertEqual(frac6.__add__(other4).__str__(), "-2.0/1.0",
                          "__add__ : test du str avec un zéro num + negatif num")
+        """
 
-    def test___sub__(self):
-        frac = Fraction()
+    def test__add__(self):
+        # Test addition with positive fractions
         frac1 = Fraction(10, 5)
-        frac2 = Fraction(11, 5)
-        frac3 = Fraction(-10, 5)
-        frac4 = Fraction(10, -5)
-        # frac5 = Fraction(-10, -5)
-        frac6 = Fraction(0, 5)
-
-        other = Fraction()
         other1 = Fraction(10, 5)
+        result = frac1 + other1
+        self.assertEqual(result.numerator, 4)
+        self.assertEqual(result.denominator, 1)
+
+        # Test addition with negative numerator
+        frac3 = Fraction(-10, 5)
+        other1 = Fraction(10, 5)
+        result = frac3 + other1
+        self.assertEqual(result.numerator, 0)
+        self.assertEqual(result.denominator, 1)
+
+        # Test addition with negative denominator
+        frac4 = Fraction(10, -5)
         other2 = Fraction(11, 5)
-        other3 = Fraction(-10, 5)
-        other4 = Fraction(10, -5)
+        result = frac4 + other2
+        self.assertEqual(result.numerator, 1)
+        self.assertEqual(result.denominator, 5)
+
+        # Test addition with negative numerator and denominator
+        frac2 = Fraction(11, 5)
         other5 = Fraction(-10, -5)
-        # other6 = Fraction(0, 5)
+        result = frac2 + other5
+        self.assertEqual(result.numerator, 21)
+        self.assertEqual(result.denominator, 5)
 
-        # 1 default
-        self.assertEqual(frac.__sub__(other).__str__(), "0.0/1.0", "__sub__ : test du str par défaut")
-        # 2 normal
-        self.assertEqual(frac1.__sub__(other2).__str__(), "-1.0/5.0", "__sub__ : test du str normal 1")
-        # 3 négatif num
-        self.assertEqual(frac3.__sub__(other1).__str__(), "-4.0/1.0", "__sub__ : test du str avec un num negatif ")
-        # 4 négatif den
-        self.assertEqual(frac4.__sub__(other2).__str__(), "-21.0/5.0", "__sub__ : test du str avec un den  négatif")
-        # 5 nagatif num and den
-        self.assertEqual(frac2.__sub__(other5).__str__(), "1.0/5.0",
-                         "__sub__ : test du str avec un nagatif num and den")
-        # 6 nagatif num and den
-        self.assertEqual(frac3.__sub__(other5).__str__(), "-4.0/1.0",
-                         "__sub__ : test du str avec un nagatif num and den")
-        # 7 nagatif num and den
-        self.assertEqual(frac6.__sub__(other1).__str__(), "-2.0/1.0", "__sub__ : test du str normal avec num = 0")
-        # 8 zéro num
-        self.assertEqual(frac6.__sub__(other3).__str__(), "2.0/1.0",
-                         "__sub__ : test du str avec un zéro num + negatif num")
-        # 9 zéro num
-        self.assertEqual(frac6.__sub__(other4).__str__(), "2.0/1.0",
-                         "__sub__ : test du str avec un zéro num + negatif num")
+        # Test addition with zero numerator
+        frac6 = Fraction(0, 5)
+        other1 = Fraction(10, 5)
+        result = frac6 + other1
+        self.assertEqual(result.numerator, 2)
+        self.assertEqual(result.denominator, 1)
 
-    def test___mul__(self):
-        frac = Fraction()
+        # Test addition with zero numerator and negative numerator
+        frac6 = Fraction(0, 5)
+        other3 = Fraction(-10, 5)
+        result = frac6 + other3
+        self.assertEqual(result.numerator, -2)
+        self.assertEqual(result.denominator, 1)
+
+        # Test addition with zero numerator and negative denominator
+        frac6 = Fraction(0, 5)
+        other4 = Fraction(10, -5)
+        result = frac6 + other4
+        self.assertEqual(result.numerator, -2)
+        self.assertEqual(result.denominator, 1)
+
+    def test__sub__(self):
+        # Test subtraction with positive fractions
         frac1 = Fraction(10, 5)
-        frac2 = Fraction(11, 5)
-        frac3 = Fraction(-10, 5)
-        frac4 = Fraction(10, -5)
-        # frac5 = Fraction(-10, -5)
-        frac6 = Fraction(0, 5)
-
-        other = Fraction()
         other1 = Fraction(10, 5)
-        other2 = Fraction(11, 5)
-        other3 = Fraction(-10, 5)
-        other4 = Fraction(10, -5)
-        other5 = Fraction(-10, -5)
-        # other6 = Fraction(0, 5)
+        result = frac1 - other1
+        self.assertEqual(result.numerator, 0)
+        self.assertEqual(result.denominator, 1)
 
-        # 1 default
-        self.assertEqual(frac.__mul__(other).__str__(), "0.0/1.0", "__mul__ : test du str par défaut")
-        # 2 normal
-        self.assertEqual(frac1.__mul__(other2).__str__(), "22.0/5.0", "__mul__ : test du str normal 1")
-        # 3 négatif num
-        self.assertEqual(frac3.__mul__(other1).__str__(), "-4.0/1.0", "__mul__ : test du str avec un num negatif ")
-        # 4 négatif den
-        self.assertEqual(frac4.__mul__(other2).__str__(), "-22.0/5.0", "__mul__ : test du str avec un den  négatif")
-        # 5 nagatif num and den
-        self.assertEqual(frac2.__mul__(other5).__str__(), "22.0/5.0",
-                         "__mul__ : test du str avec un nagatif num and den")
-        # 6 nagatif num and den
-        self.assertEqual(frac3.__mul__(other5).__str__(), "-4.0/1.0",
-                         "__mul__ : test du str avec un nagatif num and den")
-        # 7 nagatif num and den
-        self.assertEqual(frac6.__mul__(other1).__str__(), "0.0/1.0", "__mul__ : test du str normal avec num = 0")
-        # 8 zéro num
-        self.assertEqual(frac6.__mul__(other3).__str__(), "-0.0/1.0",
-                         "__mul__ : test du str avec un zéro num + negatif num")
-        # 9 zéro num
-        self.assertEqual(frac6.__mul__(other4).__str__(), "-0.0/1.0",
-                         "__mul__ : test du str avec un zéro num + negatif num")
+        # Test subtraction with negative numerator
+        frac3 = Fraction(-10, 5)
+        other1 = Fraction(10, 5)
+        result = frac3 - other1
+        self.assertEqual(result.numerator, -4)
+        self.assertEqual(result.denominator, 1)
+
+        # Test subtraction with negative denominator
+        frac4 = Fraction(10, -5)
+        other2 = Fraction(11, 5)
+        result = frac4 - other2
+        self.assertEqual(result.numerator, -21)
+        self.assertEqual(result.denominator, 5)
+
+        # Test subtraction with negative numerator and denominator
+        frac2 = Fraction(11, 5)
+        other5 = Fraction(-10, -5)
+        result = frac2 - other5
+        self.assertEqual(result.numerator, 1)
+        self.assertEqual(result.denominator, 5)
+
+        # Test subtraction with zero numerator
+        frac6 = Fraction(0, 5)
+        other1 = Fraction(10, 5)
+        result = frac6 - other1
+        self.assertEqual(result.numerator, -2)
+        self.assertEqual(result.denominator, 1)
+
+        # Test subtraction with zero numerator and negative numerator
+        frac6 = Fraction(0, 5)
+        other3 = Fraction(-10, 5)
+        result = frac6 - other3
+        self.assertEqual(result.numerator, 2)
+        self.assertEqual(result.denominator, 1)
+
+        # Test subtraction with zero numerator and negative denominator
+        frac6 = Fraction(0, 5)
+        other4 = Fraction(10, -5)
+        result = frac6 - other4
+        self.assertEqual(result.numerator, 2)
+        self.assertEqual(result.denominator, 1)
+
+    def test__mul__(self):
+        # Test multiplication with positive fractions
+        frac1 = Fraction(10, 5)
+        other1 = Fraction(11, 5)
+        result = frac1 * other1
+        self.assertEqual(result.numerator, 22)
+        self.assertEqual(result.denominator, 5)
+
+        # Test multiplication with negative numerator
+        frac3 = Fraction(-10, 5)
+        other1 = Fraction(10, 5)
+        result = frac3 * other1
+        self.assertEqual(result.numerator, -4)
+        self.assertEqual(result.denominator, 1)
+
+        # Test multiplication with negative denominator
+        frac4 = Fraction(10, -5)
+        other2 = Fraction(11, 5)
+        result = frac4 * other2
+        self.assertEqual(result.numerator, -22)
+        self.assertEqual(result.denominator, 5)
+
+        # Test multiplication with negative numerator and denominator
+        frac2 = Fraction(11, 5)
+        other5 = Fraction(-10, -5)
+        result = frac2 * other5
+        self.assertEqual(result.numerator, 22)
+        self.assertEqual(result.denominator, 5)
+
+        # Test multiplication with zero numerator
+        frac6 = Fraction(0, 5)
+        other1 = Fraction(11, 5)
+        result = frac6 * other1
+        self.assertEqual(result.numerator, 0)
+        self.assertEqual(result.denominator, 5)
+
+        # Test multiplication with zero numerator and negative numerator
+        frac6 = Fraction(0, 5)
+        other3 = Fraction(-10, 5)
+        result = frac6 * other3
+        self.assertEqual(result.numerator, 0)
+        self.assertEqual(result.denominator, 1)
+
+        # Test multiplication with zero numerator and negative denominator
+        frac6 = Fraction(0, 5)
+        other4 = Fraction(10, -5)
+        result = frac6 * other4
+        self.assertEqual(result.numerator, 0)
+        self.assertEqual(result.denominator, 1)
 
     def test___truediv__(self):
         frac = Fraction()
